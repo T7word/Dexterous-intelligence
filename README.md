@@ -98,6 +98,3 @@ cd example
 python base_example.py
 ```
 
-## License
-
-
