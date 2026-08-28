@@ -1,0 +1,5 @@
+{
+  "tests/test_dexhand_logger.py": true,
+  "tests/test_dexhand_interface.py::TestHandConfiguration::test_config_loading": true,
+  "tests/test_dexhand_interface.py::TestBoardAddressing::test_left_right_separation": true
+}

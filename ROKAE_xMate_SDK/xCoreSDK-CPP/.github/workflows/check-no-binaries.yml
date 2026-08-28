@@ -1,0 +1,34 @@
+name: Check no binary libraries in Git
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fail if prebuilt libraries are tracked
+        run: |
+          patterns='\.(lib|dll|pdb|a|so)(\.[0-9]+.*)?$'
+          tracked="$(git ls-files lib/ | grep -E "$patterns" || true)"
+          if [ -n "$tracked" ]; then
+            echo "Prebuilt libraries must not be committed to Git."
+            echo "Distribute them via GitHub Releases instead. See lib/README.md"
+            echo ""
+            echo "Tracked binary files:"
+            echo "$tracked"
+            exit 1
+          fi
+          echo "OK: no binary libraries tracked under lib/"
+
+      - name: Fail if Git LFS is configured for libraries
+        run: |
+          if [ -f .gitattributes ] && grep -q 'filter=lfs' .gitattributes; then
+            echo "Git LFS must not be used for SDK libraries. Remove LFS rules from .gitattributes."
+            exit 1
+          fi
+          echo "OK: no LFS rules for libraries"

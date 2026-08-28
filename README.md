@@ -1,103 +1,53 @@
-# xCore SDK 机器人控制接口
+# 珞石 xMate ER7Pro-M 与 DexHand021 S 控制项目
 
-* xCore SDK编程接口库是珞石机器人提供给客户用于二次开发的软件产品.
+本项目的主程序是 PySide6 可视化控制界面，用电脑网线连接珞石机器人控制器，再通过机器人末端 485 接口控制安装在末端的 DexHand021 S 三指灵巧手。电脑直连 USB 转 485 的模式也保留，用于单独调试灵巧手。
 
-## 在线文档
+## 主程序
 
-
-可以通过访问珞石官网在线文档，学习和了解其他SDK内容与其相关API的说明和使用，同时也便于了解珞石的其他技术产品。
-
-* [xCore SDK Python 在线手册](https://docs.rokae.com/docs/SDK/python)
-
-## 兼容性
-
-### 机器人控制器
-
-* xCore v3.2.1 及以上版本
-
-### 运行环境
-
-| 操作平台 | Python 解释器 | 平台 |
-|----------|---------------|------|
-| Ubuntu 18.04/20.04/22.04 | 3.8 - 3.12 | x86_64 / aarch64 |
-| Windows 10/11 | 3.8 - 3.12 | x86_64 |
-
-## 获取预编译库
-
-本仓库包含示例脚本与类型存根（`.pyi`），**不包含** Python 扩展模块（`.pyd` / `.so`）及依赖的 `xCoreSDK.dll`。这些文件通过 [GitHub Releases](https://github.com/RokaeRobot/xCoreSDK-Python/releases) 按版本分发。
-
-### 获取步骤
-
-1. **克隆本仓库**
-   ```bash
-   git clone https://github.com/RokaeRobot/xCoreSDK-Python.git
-   cd xCoreSDK-Python
-   ```
-2. **确认 SDK 版本** — 须与 Release 版本一致（当前为 **v0.7.1**，见 [CHANGELOG.md](CHANGELOG.md)）。
-3. **打开对应 Release 页面** — [Release v0.7.1](https://github.com/RokaeRobot/xCoreSDK-Python/releases/tag/v0.7.1)  
-   链接格式：`https://github.com/RokaeRobot/xCoreSDK-Python/releases/tag/v{VERSION}`
-4. **下载与本机平台、Python 版本匹配的库包**（见下表）。
-5. **在仓库根目录解压**，使文件落入 `Release/` 目录（解压后应出现 `Release/windows/` 或 `Release/linux/` 等）。
-
-> 示例代码通过 `example/setup_path.py` 自动将 `Release/` 加入模块搜索路径；库文件缺失时 `import xCoreSDK_python` 会失败。
-
-### Release 包对照
-
-| 包名 | 适用场景 |
-|------|----------|
-| `xCoreSDK-Python-{version}-win.zip` | Windows x86_64（含各 Python 版本的 `.pyd` 及 `xCoreSDK.dll`） |
-| `xCoreSDK-Python-{version}-linux-x86_64.tar.gz` | Linux x86_64（含各 Python 版本的 `.so`） |
-| `xCoreSDK-Python-{version}-linux-aarch64.tar.gz` | Linux aarch64 / ARM（含各 Python 版本的 `.so`） |
-
-Windows / Linux 包内均包含与扩展模块配套的 `xCoreSDK_python/` 类型存根（`.pyi`），供 IDE 补全使用。
-
-### 解压后目录结构
-
-```
-Release/
-  windows/
-    xCoreSDK.dll
-    xCoreSDK_python.cp3xx-win_amd64.pyd    # 按本机 Python 版本选择对应文件
-    xCoreSDK_python/                       # .pyi 类型存根
-  linux/
-    xCoreSDK_python.cpython-3xx-x86_64-linux-gnu.so
-    xCoreSDK_python/                       # .pyi 类型存根
-    arm/                                   # aarch64 平台库（单独包解压时合并到此）
-      xCoreSDK_python.cpython-3xx-aarch64-linux-gnu.so
-      xCoreSDK_python/
+```text
+ROKAE_xMate_SDK/xCoreSDK-Python/gui/robot_control_gui.py
 ```
 
-### 示例（Windows）
+主界面包括：
+
+- xMate ER7Pro-M 机器人 IP 连接、状态读取和关节/笛卡尔控制
+- DexHand021 S 的 P1、P2、P3、R 四轴控制
+- 角度、Hall、MIT 力矩模式和状态监测
+- 压力/触觉、诊断保护、寄存器和动作序列
+- 拖动录制与回放、日志和可调整窗口
+
+机器人末端模式不打开电脑 COM 口，也不创建或运行 RL 工程；末端 485 请求通过珞石 xCore SDK 发送。DexHand021 S 的 RTU 帧、CRC、设备 ID 和电机控制模式按随项目资料中的 SDK/说明书执行。
+
+## 运行
+
+Windows 10/11、64 位 Python 3.8–3.12 均可用。不要上传或依赖本地 `venv`；该目录中的环境是本机运行产物。先安装 PySide6 和 pyserial，并从珞石 xCore SDK 的官方发布包取得与 Python 版本对应的 Windows 扩展和 `xCoreSDK.dll`，放入 `ROKAE_xMate_SDK/xCoreSDK-Python/Release/windows/`。仓库只提交源码和资料，不提交 `.pyd`、`.dll`、`.so` 等预编译二进制。
 
 ```powershell
-# 在仓库根目录解压
-Expand-Archive -Path xCoreSDK-Python-0.7.1-win.zip -DestinationPath .
-# 确认存在 Release\windows\xCoreSDK_python.cp312-win_amd64.pyd（版本号按本机 Python 调整）
-cd example
-python base_example.py
+Set-Location "C:\Users\sxy18\Desktop\记录留痕\20260810三指灵巧手"
+python -m pip install PySide6 pyserial
+python ".\ROKAE_xMate_SDK\xCoreSDK-Python\gui\robot_control_gui.py"
 ```
 
-### 示例（Linux）
+使用机器人末端 485 前，先在珞石控制器现场确认末端工具 RS485 接线、供电和通信参数；程序不会替用户修改控制器配置。连接机器人后，在界面选择“机器人末端 485（珞石控制器透传）”。
 
-```bash
-# 在仓库根目录解压 x86_64 包
-tar -xzf xCoreSDK-Python-0.7.1-linux-x86_64.tar.gz
-# aarch64 需额外解压 arm 包到 Release/linux/
-cd example
-python3 base_example.py
-```
+## 目录
 
-## 使用示例
+详细分类见 [`00_项目索引/项目目录说明.md`](00_项目索引/项目目录说明.md)：
 
-**注意**：运行前请确保已按上文下载并解压库文件；将脚本中的 IP 修改为机器人实际 IP。
+- `ROKAE_xMate_SDK`：珞石 xCore SDK 和主控制程序
+- `02_灵巧手SDK`：DexHand/DexRobot SDK 源码
+- `03_协议与设备资料`：末端透传、DexHand 和珞石说明资料
+- `04_实验与采集`：D435i、标定及实验程序
+- `90_本地运行产物_不上传`：日志、缓存和临时输出
+- `99_本地归档_不上传`：压缩归档包
 
-示例代码见 `example/` 目录。各示例开头通过 `import setup_path` 加载 `Release/` 路径。
+## 本地验证
 
-```bash
-cd example
-python base_example.py
-```
+- Python 语法解析：281 个文件，0 个错误
+- PySide6 GUI 离屏启动：通过
+- xCore SDK Windows 扩展导入：通过
+- ROKAE 离线模拟示例：8/8 通过
+- DexHand 协议测试：通过（20/20）
+- 接口测试：Windows 下 36/38 通过；另外 2 项是 Linux CAN 动态库测试，因 Windows 无法加载 `libusbcanfd.so` 而跳过/失败，不影响末端 485 功能
 
-## License
-
-> Copyright (C) 2026 ROKAE (Beijing) Technology Co., LTD.
+真实机器人和灵巧手动作仍需在现场接线、供电和安全工作区确认后由操作者手动测试。

@@ -1,0 +1,39 @@
+DexHand:
+  # Configuration for left/right dexterous hand
+  left_hand:
+    channel: 0
+    hall_scale: [2.1, 2.1, 1.8, 4.0, 2.2, 1.6, 2.2, 1.6, 2.2, 1.6, 2.2, 1.6]  # Scale coefficients for hall position mode; do not edit unless you know what you are doing
+  right_hand:
+    channel: 1
+    hall_scale: [2.1, 2.1, 1.8, 4.0, 2.2, 1.6, 2.2, 1.6, 2.2, 1.6, 2.2, 1.6]  # Scale coefficients for hall position mode; do not edit unless you know what you are doing
+
+  ROS_Node:
+    hands: ['left','right']    # List of hands to control: 'left', 'right', or both
+    mock: False       # Use mock hardware instead of real hardware
+
+    # Control parameters
+    rate: 150.0  # Command sending rate in Hz
+    mode: 'impedance_grasp'  # Control mode: impedance_grasp, mit_torque, cascaded_pid, zero_torque, current, speed, hall_position, protect_hall_position
+    alpha: 0.2  # Low-pass filter intensity (0-1)
+    use_broadcast: true  # Whether to use broadcast mode for more efficient communication
+
+    # Topic configuration
+    # Left hand topics
+    left_hand_command_topic: '/left_hand/joint_commands'  # Topic to subscribe for joint commands
+    left_hand_joint_feedback_topic: '/left_hand/joint_states'  # Topic to publish joint positions & velocities
+    left_touch_feedback_topic: '/left_hand/touch_sensors'  # Topic to publish touch sensor readings
+    left_motor_feedback_topic: '/left_hand/motor_feedback'  # Topic to publish motor feedback data
+
+    # Right hand topics
+    right_hand_command_topic: '/right_hand/joint_commands'  # Topic to subscribe for joint commands
+    right_hand_joint_feedback_topic: '/right_hand/joint_states'  # Topic to publish joint positions & velocities
+    right_touch_feedback_topic: '/right_hand/touch_sensors'  # Topic to publish touch sensor readings
+    right_motor_feedback_topic: '/right_hand/motor_feedback'  # Topic to publish motor feedback data
+
+    # Feedback configuration
+    enable_feedback: true   # Enable/disable feedback publishing
+
+    # Publisher demo configuration
+    cycle_time: 3.0   # Time for each movement cycle (seconds)
+
+  ZCANDeviceType: "ZCAN_USBCANFD_100U"  # ZCAN_USBCANFD_100U/ZCAN_USBCANFD_200U

@@ -1,13 +1,41 @@
-# Prebuilt Python extension modules — distributed via GitHub Releases
-**/lib/*.so
-**/lib/*.pyd
-**/lib/*.dll
+# 本地 Python 环境
+venv/
+**/venv/
+**/.venv/
 
-Release/**/*.so
-Release/**/*.pyd
-Release/**/xCoreSDK.dll
+# Python 缓存与运行日志
+__pycache__/
+**/__pycache__/
+*.py[cod]
+logs/
+**/logs/
+_rokae_log_/
+**/_rokae_log_/
 
-scripts/
+# 文档渲染、测试和临时输出
+90_本地运行产物_不上传/
+tmp/
+**/tmp/
+tmp_docx_*/
+docx_qa*/
+_qa_*/
 
-# Release packaging output
-dist/
+# 本地归档/安装包：源码仓库不保存大压缩包
+99_本地归档_不上传/
+*.zip
+*.7z
+*.rar
+*.tar
+*.tar.gz
+*.tgz
+*.whl
+*.exe
+*.msi
+
+# 预编译 SDK/平台二进制：仓库只提交源码，二进制从官方发布包获取
+*.pyd
+*.dll
+*.so
+*.so.*
+*.dylib
+*.lib

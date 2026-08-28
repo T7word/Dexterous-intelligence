@@ -1,0 +1,23 @@
+Metadata-Version: 2.4
+Name: dexrobot_python_sdk
+Version: 0.1.0
+Summary: A comprehensive SDK for robotic hand control, simulation, and manipulation
+Author: DexRobot
+Author-email: contact@dexrobot.com
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Science/Research
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Topic :: Scientific/Engineering :: Robotics
+Requires-Python: >=3.11
+License-File: LICENSE
+Provides-Extra: docs
+Requires-Dist: sphinx>=8.1.3; extra == "docs"
+Requires-Dist: sphinx-rtd-theme>=1.3.0; extra == "docs"
+Requires-Dist: sphinx-autodoc-typehints; extra == "docs"
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: license-file
+Dynamic: provides-extra
+Dynamic: requires-python
+Dynamic: summary
