@@ -100,5 +100,4 @@ python base_example.py
 
 ## License
 
-> Copyright (C) 2026 ROKAE (Beijing) Technology Co., LTD.
 
