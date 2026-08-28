@@ -1,0 +1,20 @@
+# Right Hand Configuration
+
+# URDF paths
+urdf_path: "../../../dexrobot_urdf/urdf/dexhand021_right.urdf"
+
+# Frame names for each fingerpad
+fingerpad_frames:
+  thumb: "r_f_link1_pad"
+  index: "r_f_link2_pad"
+  middle: "r_f_link3_pad"
+  ring: "r_f_link4_pad"
+  pinky: "r_f_link5_pad"
+
+# Fingertip frames
+fingertip_frames:
+  thumb: "r_f_link1_tip"
+  index: "r_f_link2_tip"
+  middle: "r_f_link3_tip"
+  ring: "r_f_link4_tip"
+  pinky: "r_f_link5_tip"

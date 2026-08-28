@@ -1,0 +1,8 @@
+LICENSE
+README.md
+setup.py
+dexrobot_python_sdk.egg-info/PKG-INFO
+dexrobot_python_sdk.egg-info/SOURCES.txt
+dexrobot_python_sdk.egg-info/dependency_links.txt
+dexrobot_python_sdk.egg-info/requires.txt
+dexrobot_python_sdk.egg-info/top_level.txt

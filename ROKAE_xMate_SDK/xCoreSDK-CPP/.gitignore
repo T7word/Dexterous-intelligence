@@ -1,0 +1,16 @@
+cmake-build-*/
+.vs*/
+.idea/
+/example/cpp/myTest.*
+build*/
+
+# Prebuilt SDK libraries — distributed via GitHub Releases (see lib/README.md)
+lib/**/*.lib
+lib/**/*.dll
+lib/**/*.pdb
+lib/**/*.a
+lib/**/*.so
+lib/**/*.so.*
+
+# Release packaging output
+dist/
