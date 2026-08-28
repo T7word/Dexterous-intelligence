@@ -1,0 +1,2 @@
+# DexHand021 S USB RS485 dependency.
+pyserial>=3.5

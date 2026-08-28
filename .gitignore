@@ -1,0 +1,13 @@
+# Prebuilt Python extension modules — distributed via GitHub Releases
+**/lib/*.so
+**/lib/*.pyd
+**/lib/*.dll
+
+Release/**/*.so
+Release/**/*.pyd
+Release/**/xCoreSDK.dll
+
+scripts/
+
+# Release packaging output
+dist/

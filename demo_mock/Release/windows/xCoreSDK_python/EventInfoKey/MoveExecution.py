@@ -1,0 +1,7 @@
+"""MoveExecution fields mirror the official pyi."""
+CustomInfo: str = "customInfo"
+Error: str = "error"
+ID: str = "cmdID"
+ReachTarget: str = "reachTarget"
+Remark: str = "remark"
+WaypointIndex: str = "wayPointIndex"
